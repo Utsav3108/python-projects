@@ -1,0 +1,2 @@
+forr = ""
+print(forr)
