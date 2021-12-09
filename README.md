@@ -1,2 +1,2 @@
 # pyprojects
-All python projects are available here
+All my python projects are available here
