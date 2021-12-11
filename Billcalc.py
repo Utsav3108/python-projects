@@ -1,11 +1,13 @@
 from tkinter import *
 from tkinter import messagebox
 from mysql.connector import *
+import datetime
+
 root = Tk()
 root.geometry("350x500+300+300")
 root.title("Bill_Calculation")
 #****************SQLdatabase********************
-mydb = connect(host="localhost",user="root",passwd="123456789",database="utsavdb")
+mydb = connect(host="localhost",user="root",passwd="123456",port='3307',database="utsavdb")
 mycursor = mydb.cursor()
 
 titlelabel = Label(root,text="*******Light and Water Bill Calculation******* ",font=("verdana,22"))
@@ -82,8 +84,8 @@ def clicked():
         f"\n-------------------------------------------\n")
 
 
-        sqlform = "Insert into bcal(name,Rupees) values(%s,%s)"
-        bilcal = [("RLB",rent_bill),("YBL",mybill),("Wbill",waterb),("TBL",Total_bill)]
+        sqlform = "Insert into bcal2(Date, Rentbill, Yourbill, Waterbill) values(%s,%s,%s,%s)"
+        bilcal = [(f'{datetime.date.today()}',rent_bill,mybill,waterb)]
 
         mycursor.executemany(sqlform,bilcal)
         mydb.commit()
